@@ -1,0 +1,82 @@
+version: 2.1
+
+orbs:
+  # The python orb contains a set of prepackaged CircleCI configuration you can use repeatedly in your configuration files
+  # Orb commands and jobs help you with common scripting around a language/tool
+  # so you dont have to copy and paste it everywhere.
+  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
+  python: circleci/python@1.2
+
+workflows:
+  sample:  # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run. 
+    # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows 
+    jobs:
+      - build-and-test
+
+
+jobs:
+  build-and-test:  # This is the name of the job, feel free to change it to better match what you're trying to do!
+    # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
+    # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
+    # The executor is the environment in which the steps below will be executed - below will use a python 3.9 container
+    # Change the version below to your required version of python
+    docker:
+      - image: cimg/python:3.8
+    # Checkout the code as the first step. This is a dedicated CircleCI step.
+    # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
+    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
+    # Then run your tests!
+    # CircleCI will report the results back to your VCS provider.
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
+          # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
+      - run:
+          name: Run tests
+          # This assumes pytest is installed via the install-package step above
+          command: pytest
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAmt8Bxy9WHZVYlumyD8hYcS52eCjGIU/u336v4tNJ0qPbaBIa
+5ttbQRdLyu3xHYgMJE8H/iEE/3mpTrZQCx/553J++mrNoMXPtA37WqzfrdbjDsbz
+rVPp7KFMJOzYfm8OeTa2O0b0dy9/QStKySR2HglQjU7Ywd2jnE0L4GKyCjn4YRjA
+t5Rk215suB28o5ev7rEhuh7Lda71WsFMcDuRCM0cxvWkuK9mEhpk2uuIrqIt7Bo0
+uA4IFZRB9POvH5uyTwnKq9sSv0NKHqXp2NkM8zo/A0ZxqMH/d+O+UXgX6h/yVUyL
+c3RRcdI61PvfHcYMYIeD+qlH7nr1es7JpPzPQQIDAQABAoIBAHf0x+HKTn93kDjE
+JoGHAsoX3PdRTbW7viAqdn3QflvDQ0ymyWOLAHG4Y6J5Dst69zygYmZ6mO5xA6zO
+Fc2oJN8aljPMyhz/WtPyCIDBajeyPAjUHSZh2szIWrw3H7E+wA0vTZM4cF5o0b5e
+k/ycW0kEmfn52na+/90u6EYS7Chya3msvXrU5YOCOBItMCeFuaS6VU+J5+KoTWfQ
+bvw/yoyw3JmysIUd+ura2zUX3P+QecLiaOBwgiLnXZu4mYhjlgXpi/UJs2fpYWCs
+WuFuBSuke1UK5enSRr3UqIXGMjnujlNG0Bf5pL0oMcoUq3zg/NfttZvyMQRzKy8R
+F6ZjeKkCgYEA4go7Ah/rYb0fGkVSc4U4jKDg0Hy8hHB205zenD1DO+nz5uMEkro/
+AVk/T4NBADw467l9AD3IWXjJnCG8ks5S2MGfLoo+WpcCRQoyBqgqq5Rt3XrhdT72
+h5MfouLyeHWF30HRZeGs6ZE0Zch8DXNm3Gv+kv6QNqMhbJKpa54qxGcCgYEAr2Xx
+sHlJ2z65/ltoYLof6UPjkmXYDDwT3wz2eTm0KlUBNMnFd1eEwepHnIoNRGXLvpXC
+6zd2t/xPrFXXeenLLDEeeBw3vkqqF55DUGz7hv5s+Et+CRaNPkKSTzPThO2K5LNA
+jHIRqEtinvb7oV1Uk/TDnZfUx07mMJw8NYhnRhcCgYEAyhRXWLjsmD6ZdcUPx1MM
+kTyqf/lkGArrUJfntEpYt1GayYmfZwW2miANp6oyDGHKiYMUq4iQetyvcTQAAEcQ
+bdP72YGh6R8j2lEZFDZ3n1ldNypKMaWOhPoUyGyYVPTMMCIJcEnnahB0haJMtUG8
+bcbmmseWaiJBGW2spReMKHUCgYEAmiiuqV2hBVr3XFD4x3MvUvVBUk3C+tXe3T9m
+bhvCdyZpPf1NWlwIqesA79wCVyhlT+gO/m+sH39ag2ybS2KqGPg/AHBEqjKzlria
+D1kKJZb/LagkaVZx49PdBlHVydKCLgpCZG5piJJhZrhLZ4NBMB2DxMJK2LZG6ViY
+LrDpnBcCgYBKRcU6p7JALr+zcz9lsnnvOVbkXpn04u8CLgBsq8dBBgXF+p6xDGK7
+CeEDw0T3EHYEh6H7oGua5O71qWydSlAyPpBCgyWeD6N2vPkY5ArMxkKVrbz92fjC
+32TKwuoUVG/LsscITg8cMhWVEouKv2uWVmrYqWsjxaMfsjPd+rh6zA==
+-----END RSA PRIVATE KEY-----
+
+
+Public Key
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCa3wHHL1YdlViW6bIPyFhxLnZ4KMYhT+7ffq/i00nSo9toEhrm21tBF0vK7fEdiAwkTwf+IQT/ealOtlALH/nncn76as2gxc+0DftarN+t1uMOxvOtU+nsoUwk7Nh+bw55NrY7RvR3L39BK0rJJHYeCVCNTtjB3aOcTQvgYrIKOfhhGMC3lGTbXmy4Hbyjl6/usSG6Hst1rvVawUxwO5EIzRzG9aS4r2YSGmTa64iuoi3sGjS4DggVlEH0868fm7JPCcqr2xK/Q0oepenY2QzzOj8DRnGowf93475ReBfqH/JVTItzdFFx0jrU+98dxgxgh4P6qUfuevV6zsmk/M9B 
+
+5.1k
+Shares
+Thanks for using this software, for Cofee/Beer/Amazon bill and further development of this project please Share.
+
+Any private key value that you enter or we generate is not stored on this site, this tool is provided via an HTTPS URL to ensure that private keys cannot be stolen, for extra security run this software on your network, no cloud dependency
+
+Asking for donation sound bad to me, so i'm raising fund from by offering all my Nine book for just $9
+
